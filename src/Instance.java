@@ -94,6 +94,10 @@ public class Instance {
         return this.coords;
     }
 
+    public Bounds getBounds(){
+        return new Bounds(this.maxX, this.maxY, this.minX, this.minY);
+    }
+
     public void debugPrint(){
         System.out.println(this.name);
         System.out.println(this.coords.length + " cities");
