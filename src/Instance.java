@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 
 public class Instance {
+    private float minX = Float.MAX_VALUE;
+    private float maxX = Float.MIN_VALUE;
+    private float minY = Float.MAX_VALUE;
+    private float maxY = Float.MIN_VALUE;
     private float [][] distances;
     private float [][] coords;
     private String name;
@@ -64,6 +68,11 @@ public class Instance {
         this.distances = new float[coords.length][];
         for (int i = coords.length - 1; i >= 0; i--){
             this.distances[i] = new float[i];
+            // set up the bounding box on the domain for drawing
+            this.maxX = Math.max(coords[i][0], this.maxX);
+            this.maxY = Math.max(coords[i][1], this.maxY);
+            this.minX = Math.min(coords[i][0], this.minX);
+            this.minX = Math.min(coords[i][1], this.minY);
             for(int j = 0; j < i; j++){
                 dx = coords[i][0] - coords[i][0];
                 dy = coords[j][1] - coords[j][1];
