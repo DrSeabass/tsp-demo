@@ -2,6 +2,7 @@ import java.util.Collections.*;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import java.util.Random;
 
 public class RandomWalk{
     private Instance inst;
@@ -10,6 +11,7 @@ public class RandomWalk{
     private Tspdemo display;
     private int numCities;
     int stepCount = 0;
+    private Random entropy; 
 
     public RandomWalk(Instance i, Tspdemo d){
         this.inst = i;
@@ -20,6 +22,7 @@ public class RandomWalk{
         for(int j = 0; j < this.inst.getCoords().length; j++){
             this.sol.add(j, new Integer(j));
         }
+        this.entropy = new Random();
     }
 
     private void updateIncumbent(){
@@ -46,7 +49,11 @@ public class RandomWalk{
     }
 
     private void step(){
-        java.util.Collections.shuffle(this.sol);
+        int i = this.entropy.nextInt(this.numCities);
+        int j = this.entropy.nextInt(this.numCities);
+        Integer tmp = this.sol.get(i);
+        this.sol.set(i, this.sol.get(j));
+        this.sol.set(j, tmp);
         this.updateIncumbent();
         this.stepCount ++;
         if((this.stepCount % 10000) == 0){
