@@ -73,6 +73,18 @@ public class Instance {
         }
     }
 
+    public float distance(int i, int j){
+        if (j < i){
+            return this.distances[i][j];
+        }else{
+            return this.distances[j][i];
+        }
+    }
+
+    public float[][] getCoords(){
+        return this.coords;
+    }
+
     public void debugPrint(){
         System.out.println(this.name);
         System.out.println(this.coords.length + " cities");
