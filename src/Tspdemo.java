@@ -38,7 +38,7 @@ public class Tspdemo extends JPanel{
         for(int i = 0; i < coords.length; i++){
             x = (int)(sWidth - Math.floor((coords[i][0] - this.bbox.minX) * scaleX));
             y = (int)(sHeight - Math.floor((coords[i][1] - this.bbox.minY) * scaleY));
-            g.fillRect(x,y,1,1);
+            g.fillRect(x,y,2,2);
         }
     }
 
