@@ -74,8 +74,8 @@ public class Instance {
             this.minX = Math.min(coords[i][0], this.minX);
             this.minY = Math.min(coords[i][1], this.minY);
             for(int j = 0; j < i; j++){
-                dx = coords[i][0] - coords[i][0];
-                dy = coords[j][1] - coords[j][1];
+                dx = coords[i][0] - coords[j][0];
+                dy = coords[i][1] - coords[j][1];
                 d = Math.sqrt(dx * dx + dy * dy);
                 this.distances[i][j] = (float)d;
             }

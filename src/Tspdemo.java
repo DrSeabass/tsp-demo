@@ -34,6 +34,27 @@ public class Tspdemo extends JPanel{
 
         float[][] coords = this.cities.getCoords();
 
+        if (this.sol != null){
+            g.drawString("Tour Cost: " + this.sol.cost, 0, (int) (sHeight - 10));
+            // paint the tour here as well.
+            int sx = (int)(sWidth - Math.floor((coords[coords.length-1][0] - this.bbox.minX) * scaleX));;
+            int sy = (int)(sHeight - Math.floor((coords[coords.length-1][1] - this.bbox.minY) * scaleY));;
+            int ex = -1;
+            int ey = -1;
+            g.setColor(Color.BLUE);
+            for(int i = 0; i < coords.length - 1; i++){
+                ex = (int)(sWidth - Math.floor((coords[i][0] - this.bbox.minX) * scaleX));
+                ey = (int)(sHeight - Math.floor((coords[i][1] - this.bbox.minY) * scaleY));
+                if (sx >= 0 && ex >= 0){
+                    g.drawLine(sx,sy,ex,ey);
+                }
+                    sx = ex;
+                    sy = ey;
+            }
+        }else{
+            g.drawString("No Tour Found.",0, (int) (sHeight - 10));
+        }
+
         System.out.println("Painting cities...");
         System.out.println("sWidth: " + sWidth + " sHeight: " + sHeight);
         g.setColor(Color.RED);
@@ -41,32 +62,6 @@ public class Tspdemo extends JPanel{
             x = (int)(sWidth - Math.floor((coords[i][0] - this.bbox.minX) * scaleX));
             y = (int)(sHeight - Math.floor((coords[i][1] - this.bbox.minY) * scaleY));
             g.fillRect(x,y,2,2);
-        }
-        if (this.sol != null){
-            g.drawString("Tour Cost: " + this.sol.cost, 0, (int) (sHeight - 10));
-            // paint the tour here as well.
-            int j = 0;
-            int sx = -1;
-            int sy = -1;
-            int ex = -1;
-            int ey = -1;
-            g.setColor(Color.BLUE);
-            for(int i = 0; i < coords.length - 1; i++){
-                if (sx < 0){
-                    sx = (int)(sWidth - Math.floor((coords[i][0] - this.bbox.minX) * scaleX));
-                    sy = (int)(sHeight - Math.floor((coords[i][1] - this.bbox.minY) * scaleY));
-                }else{
-                    sx = ex;
-                    sy = ey;
-                    ex = (int)(sWidth - Math.floor((coords[i][0] - this.bbox.minX) * scaleX));
-                    ey = (int)(sHeight - Math.floor((coords[i][1] - this.bbox.minY) * scaleY));
-                }
-                if (sx >= 0 && ex >= 0){
-                    g.drawLine(sx,sy,ex,ey);
-                }
-            }
-        }else{
-            g.drawString("No Tour Found.",0, (int) (sHeight - 10));
         }
     }
 

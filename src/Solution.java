@@ -10,7 +10,11 @@ public class Solution{
     }
 
     public boolean better(Solution s){
-        return this.cost < s.cost;
+        if(s == null){
+            return true;
+        }else{
+            return this.cost < s.cost;
+        }
     }
 
     public boolean better(float c){
