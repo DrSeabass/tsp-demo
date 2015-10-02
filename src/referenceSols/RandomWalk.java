@@ -1,3 +1,6 @@
+package referenceSols;
+
+import tsp.*;
 import java.util.Collections.*;
 import java.util.List;
 import java.util.ArrayList;

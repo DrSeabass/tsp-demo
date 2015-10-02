@@ -1,5 +1,5 @@
 // Read and represent an instance of the TSP
-
+package tsp;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.Math;

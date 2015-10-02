@@ -1,5 +1,5 @@
 // represents a solution to the tsp problem
-
+package tsp;
 public class Solution{
     public int[] order; // Which city to visit 0th, 1st, snd, etc.
     public float cost = Float.MAX_VALUE;

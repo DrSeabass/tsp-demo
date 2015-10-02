@@ -3,20 +3,19 @@
 %.class : %.java
 	javac $^
 
-all: tspdemo
+all: tspdemo randomWalk
 
-tspdemo: Tspdemo.class Instance.class Bounds.class Solution.class
-	jar -cvfe Tspdemo.jar Tspdemo $^
+tspdemo: tsp/Tspdemo.class tsp/Instance.class tsp/Bounds.class tsp/Solution.class
+	jar -cvfe Tspdemo.jar tsp/Tspdemo $^
 
-randomWalk: referenceSols/RandomWalk.class Tspdemo.class Instance.class Bounds.class Solution.class
+randomWalk: referenceSols/RandomWalk.class tsp/Tspdemo.class tsp/Instance.class tsp/Bounds.class tsp/Solution.class
 	jar -cvfe RandomWalk.jar referenceSols/RandomWalk $^
 
 .PHONY: clean
 
 clean:
-	- rm *.class
 	- rm *.jar
-	- rm *\~
+	- rm tsp/*.class
+	- rm tsp/*\~
 	- rm referenceSols/*.class
-	- rm referenceSols/*.jar
 	- rm referenceSols/*\~

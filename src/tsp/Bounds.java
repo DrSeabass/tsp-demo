@@ -1,3 +1,4 @@
+package tsp;
 public class Bounds {
     public float maxX = Float.MAX_VALUE;
     public float maxY = Float.MAX_VALUE;
