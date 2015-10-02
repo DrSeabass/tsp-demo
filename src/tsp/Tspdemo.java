@@ -38,14 +38,15 @@ public class Tspdemo extends JPanel{
         if (this.sol != null){
             g.drawString("Tour Cost: " + this.sol.cost, 0, (int) (sHeight - 10));
             // paint the tour here as well.
-            int sx = (int)(sWidth - Math.floor((coords[coords.length-1][0] - this.bbox.minX) * scaleX));;
-            int sy = (int)(sHeight - Math.floor((coords[coords.length-1][1] - this.bbox.minY) * scaleY));;
+            int sx = (int)(sWidth - Math.floor((coords[this.sol.order[coords.length-1]][0] - this.bbox.minX) * scaleX));;
+            int sy = (int)(sHeight - Math.floor((coords[this.sol.order[coords.length-1]][1] - this.bbox.minY) * scaleY));;
             int ex = -1;
             int ey = -1;
             g.setColor(Color.BLUE);
             for(int i = 0; i < coords.length; i++){
-                ex = (int)(sWidth - Math.floor((coords[i][0] - this.bbox.minX) * scaleX));
-                ey = (int)(sHeight - Math.floor((coords[i][1] - this.bbox.minY) * scaleY));
+                int j = this.sol.order[i];
+                ex = (int)(sWidth - Math.floor((coords[j][0] - this.bbox.minX) * scaleX));
+                ey = (int)(sHeight - Math.floor((coords[j][1] - this.bbox.minY) * scaleY));
                 if (sx >= 0 && ex >= 0){
                     g.drawLine(sx,sy,ex,ey);
                 }
