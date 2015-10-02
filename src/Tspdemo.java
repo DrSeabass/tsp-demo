@@ -8,9 +8,9 @@ import java.awt.BorderLayout;
 import java.lang.Math;
 
 public class Tspdemo extends JPanel{
-    Solution sol;
-    Instance cities;
-    Bounds bbox;
+    private Solution sol;
+    private Instance cities;
+    private Bounds bbox;
 
     public Tspdemo(Instance i){
         super();
