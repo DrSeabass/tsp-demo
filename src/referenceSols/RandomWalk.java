@@ -13,8 +13,8 @@ public class RandomWalk{
     private Solution incumbent;
     private Tspdemo display;
     private int numCities;
-    int stepCount = 0;
-    private Random entropy; 
+    private int stepCount = 0;
+    private Random entropy;
 
     public RandomWalk(Instance i, Tspdemo d){
         this.inst = i;
@@ -54,13 +54,15 @@ public class RandomWalk{
     private void step(){
         int i = this.entropy.nextInt(this.numCities);
         int j = this.entropy.nextInt(this.numCities);
-        Integer tmp = this.sol.get(i);
-        this.sol.set(i, this.sol.get(j));
-        this.sol.set(j, tmp);
-        this.updateIncumbent();
-        this.stepCount ++;
-        if((this.stepCount % 10000) == 0){
-            System.out.println("Took " + this.stepCount + " steps.");
+        if(Math.abs(i - j) > 1){
+            Integer tmp = this.sol.get(i);
+            this.sol.set(i, this.sol.get(j));
+            this.sol.set(j, tmp);
+            this.updateIncumbent();
+            this.stepCount ++;
+            if((this.stepCount % 10000) == 0){
+                System.out.println("Took " + this.stepCount + " steps.");
+            }
         }
     }
 
