@@ -43,7 +43,7 @@ public class Tspdemo extends JPanel{
             int ex = -1;
             int ey = -1;
             g.setColor(Color.BLUE);
-            for(int i = 0; i < coords.length - 1; i++){
+            for(int i = 0; i < coords.length; i++){
                 ex = (int)(sWidth - Math.floor((coords[i][0] - this.bbox.minX) * scaleX));
                 ey = (int)(sHeight - Math.floor((coords[i][1] - this.bbox.minY) * scaleY));
                 if (sx >= 0 && ex >= 0){
