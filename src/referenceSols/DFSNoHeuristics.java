@@ -40,7 +40,9 @@ public class DFSNoHeuristics{
     }
 
     private void updateIncumbent(){
-        if(this.incumbent == null || !this.incumbent.better(this.cost)){
+        float finalCost = this.cost + this.inst.distance(0, this.sol.peek().city);
+        if(this.incumbent == null || !this.incumbent.better(finalCost)){
+            this.debugPrint();
             int[] cities = new int[this.numCities];
             int i = 0;
             for(State s : this.sol){
@@ -48,18 +50,17 @@ public class DFSNoHeuristics{
                 i++;
             }
             this.incumbent = new Solution(cities, this.cost);
-            this.display.updateSolution(incumbent);
+            this.display.updateSolution(this.incumbent);
         }
     }
-
 
     private void moveHead(){
         State tip = this.sol.pop();
         int tc = tip.city;
         tip.city = this.nextUnvisited(tc);
         this.visited[tc] = false;
+        this.cost -= tip.legCost;
         if(tip.city > 0){
-            this.cost -= tip.legCost;
             this.visited[tip.city] = true;
             float c = this.inst.distance(this.sol.peek().city, tip.city);
             tip.legCost = c;
@@ -76,6 +77,7 @@ public class DFSNoHeuristics{
         }
         this.depth--;
         if(depth > 0){
+            // we need to move the tip on to the next possibility.
             this.moveHead();
             return true;
         }else{
@@ -83,22 +85,30 @@ public class DFSNoHeuristics{
         }
     }
 
+    private void debugPrint(){
+        float c = 0;
+        for(State s : this.sol){
+            System.out.print(" " + s.city);
+            c += s.legCost;
+        }
+        System.out.println(" of cost " + this.cost + " Vs. " + c);
+    }
+
     private boolean step(){
         this.stepCount ++;
-        if(this.stepCount % 10000 == 0){
-            System.out.println("Took " + this.stepCount + " search steps");
-        }
+        //        if(this.stepCount % 1000000 == 0){
+        //            System.out.println("Took " + this.stepCount + " search steps");
+        //        }
         if (this.depth == this.numCities - 1){ // stack is a solution
             this.updateIncumbent();
             return this.back();
         }else{
             State head = this.sol.peek();
-            // System.out.println("Depth: " + depth + " City: " + head.city);
             if(head.city >= this.numCities || head.city < 0){
                 return this.back();
-                //            }else if (this.incumbent != null && this.incumbent.better(this.cost)){
-                // System.out.println("Pruning on incumbent cost: " + this.cost);
-                //                return this.back();
+            }else if (this.incumbent != null && this.incumbent.better(this.cost)){
+                //System.out.println("Pruning on incumbent cost: " + this.cost);
+                return this.back();
             }else{
                 // going forward
                 int nextCity = nextUnvisited(0);
