@@ -6,8 +6,10 @@ public class Bounds {
 
     public Bounds(float maxX, float maxY, float minX, float minY){
         this.maxX = maxX;
-        this.minY = minY;
-        this.minX = minX;
         this.maxY = maxY;
+        this.minX = minX;
+        this.minY = minY;
+        System.out.println("maxX: " + this.maxX + " maxY: " + this.maxY);
+        System.out.println("minX: " + this.minX + " minY: " + this.minY);
     }
 }

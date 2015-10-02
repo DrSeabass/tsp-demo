@@ -8,8 +8,8 @@ import java.io.FileNotFoundException;
 
 public class Instance {
     private float minX = Float.MAX_VALUE;
-    private float maxX = Float.MIN_VALUE;
     private float minY = Float.MAX_VALUE;
+    private float maxX = Float.MIN_VALUE;
     private float maxY = Float.MIN_VALUE;
     private float [][] distances;
     private float [][] coords;
@@ -47,8 +47,8 @@ public class Instance {
                     pLine = line.split(" ");
                     ind = Integer.parseInt(pLine[0]);
                     ind --; // 1-based indexing
-                    cs[ind][0] = Float.valueOf(pLine[1]);
-                    cs[ind][1] = Float.valueOf(pLine[2]);
+                    cs[ind][1] = Float.valueOf(pLine[1]);
+                    cs[ind][0] = Float.valueOf(pLine[2]);
                 }
             }
         }catch(IOException ioe){
@@ -72,7 +72,7 @@ public class Instance {
             this.maxX = Math.max(coords[i][0], this.maxX);
             this.maxY = Math.max(coords[i][1], this.maxY);
             this.minX = Math.min(coords[i][0], this.minX);
-            this.minX = Math.min(coords[i][1], this.minY);
+            this.minY = Math.min(coords[i][1], this.minY);
             for(int j = 0; j < i; j++){
                 dx = coords[i][0] - coords[i][0];
                 dy = coords[j][1] - coords[j][1];
