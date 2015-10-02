@@ -5,7 +5,7 @@
 
 all: tspdemo
 
-tspdemo: Tspdemo.class
+tspdemo: Tspdemo.class Instance.class
 	jar -cvfe Tspdemo.jar Tspdemo $^
 
 .PHONY: clean
