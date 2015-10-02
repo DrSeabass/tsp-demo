@@ -49,7 +49,7 @@ public class DFSNoHeuristics{
                 cities[i] = s.city;
                 i++;
             }
-            this.incumbent = new Solution(cities, this.cost);
+            this.incumbent = new Solution(cities, finalCost);
             this.display.updateSolution(this.incumbent);
         }
     }
