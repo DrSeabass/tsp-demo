@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.lang.Math;
 
 public class Tspdemo extends JPanel{
+    Solution sol;
     Instance cities;
     Bounds bbox;
 
@@ -18,7 +19,8 @@ public class Tspdemo extends JPanel{
         this.bbox = this.cities.getBounds();
     }
 
-    private void paintCities(Graphics g){
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
         float sWidth = (float)(this.getWidth() - 10);
         float sHeight = (float)(this.getHeight() - 10);
         float mWidth = bbox.maxX - bbox.minX;
@@ -40,11 +42,16 @@ public class Tspdemo extends JPanel{
             y = (int)(sHeight - Math.floor((coords[i][1] - this.bbox.minY) * scaleY));
             g.fillRect(x,y,2,2);
         }
+        if (this.sol != null){
+            // paint the tour here as well.
+        }
     }
 
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        this.paintCities(g);
+    public void updateSolution(Solution s){
+        if (s.better(this.sol)){
+            this.sol = s;
+            this.repaint();
+        }
     }
 
     public static void main(String[] argv){
