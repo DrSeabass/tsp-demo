@@ -8,13 +8,13 @@ import javax.swing.JFrame;
 import java.util.Random;
 
 public class HillClimbing{
-    private Instance inst;
-    private List<Integer> sol;
-    private Solution incumbent;
-    private Tspdemo display;
-    private int numCities;
-    private int stepCount = 0;
-    private Random entropy;
+    protected Instance inst;
+    protected List<Integer> sol;
+    protected Solution incumbent;
+    protected Tspdemo display;
+    protected int numCities;
+    protected int stepCount = 0;
+    protected Random entropy;
 
     public HillClimbing(Instance i, Tspdemo d){
         this.inst = i;
@@ -28,7 +28,7 @@ public class HillClimbing{
         this.restart();
     }
 
-    private void updateIncumbent(){
+    protected void updateIncumbent(){
         float cost = 0;
         cost = 0;
         int sCity = this.sol.get(this.numCities - 1).intValue();
@@ -51,18 +51,18 @@ public class HillClimbing{
         }
     }
 
-    private void restart(){
+    protected void restart(){
         java.util.Collections.shuffle(this.sol);
         this.updateIncumbent();
     }
 
-    private void swap(int i, int j){
+    protected void swap(int i, int j){
         Integer tmp = this.sol.get(i);
         this.sol.set(i, this.sol.get(j));
         this.sol.set(j, tmp);
     }
 
-    private float getCost(){
+    protected float getCost(){
         float cost = 0;
         int sCity = this.sol.get(this.numCities - 1).intValue();
         int nCity = -1;
@@ -75,19 +75,19 @@ public class HillClimbing{
         return cost;
     }
 
-    private int prev(int ind){
+    protected int prev(int ind){
         if (ind == 0)
             return this.numCities - 1;
         return ind - 1;
     }
 
-    private int next(int ind){
+    protected int next(int ind){
         if (ind == this.numCities - 1)
             return 0;
         return ind + 1;
     }
 
-    private float computeCost(float currentCost, int i, int j){
+    protected float computeCost(float currentCost, int i, int j){
         float iCost = 0;
         float jCost = 0;
         float delta;
@@ -107,7 +107,7 @@ public class HillClimbing{
         return currentCost + ((iCost + jCost) - delta);
     }
 
-    private void step(){
+    protected void step(){
         int besti = 0;
         int bestj = 0;
         float currentCost = this.getCost();

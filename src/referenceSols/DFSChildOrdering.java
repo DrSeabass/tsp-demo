@@ -12,7 +12,7 @@ public class DFSChildOrdering{
     private int numCities;
     private int stepCount;
     private Tspdemo display;
-    private Solution incumbent;
+    private Solution incumbent = null;
     private Instance inst;
 
     private boolean[] visited;
@@ -40,7 +40,11 @@ public class DFSChildOrdering{
         this.sol.push(root);
     }
 
-    private void debugPrint(){
+    public Solution getInc(){
+        return this.incumbent;
+    }
+
+    protected void debugPrint(){
         float c = 0;
         for(NearestCityState s : this.sol){
             System.out.print(" " + s.city);
@@ -49,7 +53,7 @@ public class DFSChildOrdering{
         System.out.println(" of cost " + this.cost + " Vs. " + c);
     }
 
-    private void updateCost(boolean isSol){
+    protected void updateCost(boolean isSol){
         int prevCity = this.sol.peek().city;
         if(isSol)
             prevCity = -1;
@@ -63,7 +67,7 @@ public class DFSChildOrdering{
     }
 
 
-    private void updateIncumbent(){
+    protected void updateIncumbent(){
         this.updateCost(true);
         float finalCost = this.cost + this.inst.distance(0, this.sol.peek().city);
         if(this.incumbent == null || !this.incumbent.better(finalCost)){
@@ -80,7 +84,7 @@ public class DFSChildOrdering{
         }
     }
 
-    private boolean back(){
+    protected boolean back(){
         NearestCityState head = this.sol.pop();
         this.depth --;
         this.visited[head.city] = false;
@@ -90,7 +94,7 @@ public class DFSChildOrdering{
             return false;
     }
 
-    private boolean step(){
+    protected boolean step(){
         this.stepCount ++;
         if (this.depth == this.numCities - 1){ // stack is a solution
             this.updateIncumbent();

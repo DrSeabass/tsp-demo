@@ -3,7 +3,7 @@
 %.class : %.java
 	javac $^
 
-all: tspdemo randomWalk dfsSimple dfsCO hillClimb
+all: tspdemo randomWalk dfsSimple dfsCO hillClimb hillClimbGS
 
 tspdemo: tsp/Tspdemo.class tsp/Instance.class tsp/Bounds.class tsp/Solution.class
 	jar -cvfe Tspdemo.jar tsp/Tspdemo $^
@@ -13,6 +13,9 @@ randomWalk: referenceSols/RandomWalk.class tsp/Tspdemo.class tsp/Instance.class 
 
 hillClimb: referenceSols/HillClimbing.class tsp/Tspdemo.class tsp/Instance.class tsp/Bounds.class tsp/Solution.class
 	jar -cvfe HillClimb.jar referenceSols/HillClimbing $^
+
+hillClimbGS: referenceSols/HillClimbingGreedyStart.class referenceSols/DFSChildOrdering.class referenceSols/HillClimbing.class tsp/Tspdemo.class tsp/Instance.class tsp/Bounds.class tsp/Solution.class referenceSols/NearestCityState.class
+	jar -cvfe HillClimbGreedyStart.jar referenceSols/HillClimbingGreedyStart $^
 
 dfsSimple: referenceSols/DFSNoHeuristics.class referenceSols/State.class tsp/Tspdemo.class tsp/Instance.class tsp/Bounds.class tsp/Solution.class
 	jar -cvfe DFSNoHeuristics.jar referenceSols/DFSNoHeuristics $^
